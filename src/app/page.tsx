@@ -65,7 +65,8 @@ export default function Home() {
           console.warn("Stats not available, skipping.");
         }
       } catch (error: unknown) {
-        console.warn("Global stats fetch error:", error?.message ?? error);
+        const err = error as Error;
+        console.warn("Global stats fetch error:", err.message || err);
       }
 
       // 📈 Fetch Chart Data
@@ -90,7 +91,8 @@ export default function Home() {
           setChartData({ labels, values });
         }
       } catch (error: unknown) {
-        console.warn("Chart data fetch error:", error?.message ?? error);
+        const err = error as Error;
+        console.warn("Chart data fetch error:", err.message || err);
       }
 
       setLoading(false);
