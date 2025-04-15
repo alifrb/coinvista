@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import { styleText } from "util";
+import styles from "./page.module.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +30,34 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         {children}
+        <footer
+          className={`text-center py-4 d-flex align-items-center justify-content-center flex-column ${styles.footer}`}
+        >
+          <p className="mb-1">
+            🚀 Built by <strong>Ali Farahbakhshdarabi</strong>
+          </p>
+          <p className="mb-1" style={{ fontSize: "0.9rem" }}>
+            Front-End Developer • React | Next.js | TypeScript
+          </p>
+          <div className="d-flex justify-content-center align-items-center">
+            <a
+              href="https://github.com/alifrb"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-light me-3"
+            >
+              <i className="bi bi-github fs-4"></i>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/ali-farahbakhshdarabi-a7a77b202/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-light"
+            >
+              <i className="bi bi-linkedin fs-4"></i>
+            </a>
+          </div>
+        </footer>
       </body>
     </html>
   );

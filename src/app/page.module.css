@@ -68,10 +68,7 @@
   padding: 0 20px;
   border: none;
   border: 1px solid transparent;
-  transition:
-    background 0.2s,
-    color 0.2s,
-    border-color 0.2s;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -93,9 +90,9 @@ a.secondary {
 }
 
 .footer {
-  grid-row-start: 3;
+  /* grid-row-start: 3; */
   display: flex;
-  gap: 24px;
+  gap: 5px;
 }
 
 .footer a {
@@ -165,4 +162,116 @@ a.secondary {
   .logo {
     filter: invert();
   }
+}
+
+.hero {
+  height: 100vh;
+  background-image: url("/crypto4.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* ✅ THIS is the key */
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 40, 100, 0.5),
+    rgba(0, 0, 0, 0.9)
+  );
+  z-index: 1;
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  color: white;
+  text-align: center;
+}
+
+.main {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  padding: 0;
+}
+
+.slogan_style {
+  font-size: 50px;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  opacity: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255);
+  @media (max-width: 576px) {
+    font-size: 35px;
+  }
+}
+
+.scrollIndicator {
+  font-size: 2rem;
+  opacity: 0.7;
+  animation: bounce 1.5s infinite;
+  cursor: pointer;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
+
+.site_name {
+  font-size: 65px;
+  letter-spacing: 0.4rem;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5),
+    0 0 20px rgba(0, 209, 209, 0.2);
+  text-transform: uppercase;
+  @media (max-width: 576px) {
+    font-size: 45px;
+  }
+}
+
+.card {
+  border: none;
+  background-color: #f1f2f6;
+  color: #1e272e;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.02) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.btc_trend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btc_trend canvas {
+  width: 80% !important;
+  height: auto !important;
+  @media (max-width: 576px) {
+    width: 100% !important;
+  }
+}
+
+.top_crypto_icons {
+  width: 70%;
+}
+
+.footer {
+  background: linear-gradient(135deg, #0a0f2c, #1e2a78);
+  color: #ffffff;
 }
