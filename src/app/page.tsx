@@ -52,7 +52,8 @@ export default function Home() {
           console.warn("Coins not available, skipping.");
         }
       } catch (error: unknown) {
-        console.warn("Top coins fetch error:", error?.message ?? error);
+        const err = error as Error;
+        console.warn("Top coins fetch error:", err.message || err);
       }
 
       // 📊 Fetch Global Stats
