@@ -7,6 +7,7 @@ import MarketCapTrendChart from "../components/MarketCapTrendChart";
 import { getGlobalStats } from "../../lib/coinGecko";
 import Loading from "../components/Loading";
 import axios from "axios";
+import Image from "next/image";
 
 interface Coin {
   id: string;
@@ -26,9 +27,6 @@ interface GlobalStats {
   market_cap_percentage: { btc: number };
 }
 
-interface MarketChartData {
-  market_caps: [number, number][]; // [timestamp, value]
-}
 export default function Home() {
   const [loading, setLoading] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -40,8 +38,6 @@ export default function Home() {
   }>({ labels: [], values: [] });
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [scrollY, setScrollY] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
 
   useEffect(() => {
     setMounted(true);
@@ -55,7 +51,7 @@ export default function Home() {
         } else {
           console.warn("Coins not available, skipping.");
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.warn("Top coins fetch error:", error?.message ?? error);
       }
 
@@ -67,7 +63,7 @@ export default function Home() {
         } else {
           console.warn("Stats not available, skipping.");
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.warn("Global stats fetch error:", error?.message ?? error);
       }
 
@@ -92,7 +88,7 @@ export default function Home() {
           const values = raw.map(([, value]: [number, number]) => value);
           setChartData({ labels, values });
         }
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.warn("Chart data fetch error:", error?.message ?? error);
       }
 
@@ -101,8 +97,6 @@ export default function Home() {
 
     loadEverything();
   }, []);
-
-  const fade = windowHeight ? Math.min(scrollY / windowHeight, 1) : 0;
 
   const filteredCoins = coins.filter(
     (coin) =>
@@ -234,14 +228,20 @@ export default function Home() {
                         key={coin.id}
                         className="row m-0 p-0 flex-row justify-start"
                       >
-                        <div className="col-2 d-flex align-items-center ">
-                          <img
+                        <div className="position-relative col-2 d-flex align-items-center ">
+                          <Image
+                            src={coin.image}
+                            alt={coin.name}
+                            className={styles.top_crypto_icons}
+                            fill
+                            style={{ objectFit: "contain" }}
+                            unoptimized
+                          />
+                          {/* <img
                             className={`${styles.top_crypto_icons}`}
                             src={coin.image}
                             alt={coin.name}
-                            // width={20}
-                            // height={20}
-                          />
+                          /> */}
                         </div>
                         <div className="col-3 d-flex align-items-center">
                           <strong>{coin.name}</strong>
